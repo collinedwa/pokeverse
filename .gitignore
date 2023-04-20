@@ -19,6 +19,7 @@ haters
 .vscode
 .cache
 TODO.md
+package-lock.json
 
 # package managers
 npm-debug.log*
