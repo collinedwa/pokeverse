@@ -54,8 +54,8 @@ function App() {
           borderRadius: 2
         }}
       >
-      {filteredList.map((pokemon)=><>
-        <PokemonCard url={pokemon.url} name={pokemon.name} list={filteredList} />
+      {filteredList.map((pokemon, idx)=><>
+        <PokemonCard key={idx} url={pokemon.url} name={pokemon.name} list={filteredList} />
       </>)}
       </Box>
       

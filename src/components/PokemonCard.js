@@ -36,8 +36,8 @@ function PokemonCard({ url, name, list}) {
         <Typography variant="body1" color="text.primary">
           abilities:
         </Typography>
-        {pokeData.abilities.map((a) => <>
-        <Typography variant="body2" color="text.secondary">{a.ability.name}</Typography>
+        {pokeData.abilities.map((a, idx) => <>
+        <Typography key={idx} variant="body2" color="text.secondary">{a.ability.name}</Typography>
         </>)}
       </CardContent>
     </Card>
