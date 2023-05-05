@@ -6,3 +6,12 @@ body {
 h1 {
   font-weight: 800 !important;
 }
+
+.poke-title:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.poke-title:active {
+  transform: scale(0.95);
+}

@@ -3,45 +3,62 @@ import {useState, useEffect} from 'react';
 import {Typography, Card, Box} from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import {useNavigate} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Navigation } from '../components/Navigation';
 
-function PokemonCard({ url, name, list}) {
+function PokemonDetailsExtended() {
+  const params = useParams();
   const [pokeData, setPokeData] = useState();
-  const navigate = useNavigate();
+
   useEffect(()=>{
     const retrieve = async () => {
-      const res = await fetch(url);
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`);
       const data = await res.json();
       setPokeData(data);
     }
     retrieve();
-  }, [list]);
+  }, []);
 
   if (pokeData === undefined) return null;
 
   return <>
+    <Navigation/>
+    <div sx={{
+      display: "flex",
+      justifyContent: "center",
+      mx: "auto"
+    }}>
     <Card sx={{
-      width: 300,
-      height: 400,
-      m: 1
+      mx: 1,
+      width: 600,
+      height: 700,
       }}> 
       <CardMedia
-        sx={{ height: 200 }}
         image={pokeData.sprites.front_default}
-        title={name}
+        title={pokeData.name}
+        sx={{ height: 400,
+              mx: "auto" }}
       />
       <CardContent>
         <Box sx={{
           display: "flex",
           justifyContent: "space-between"
         }}>
-          <Typography gutterBottom variant="h5" component="div" className="poke-title" onClick={()=>{navigate(`/${name}`)}}>
-            {name}
+          <Typography gutterBottom variant="h5" component="div" className="poke-title-ext">
+            {pokeData.name}
           </Typography>
           <Typography gutterBottom variant="h6" color="text.secondary">
             {pokeData.id}
           </Typography>
         </Box>
+        <Typography variant="body1" color="text.primary">height: {pokeData.height}</Typography>
+        <Typography variant="body1" color="text.primary">weight: {pokeData.weight}</Typography>
+        <Typography variant="body1" color="text.primary">
+          types:
+        </Typography>
+        {pokeData.types.map((t, idx) => <>
+        <Typography key={idx} variant="body2" color="text.secondary">{t.type.name}</Typography>
+        </>)}
         <Typography variant="body1" color="text.primary">
           abilities:
         </Typography>
@@ -50,7 +67,8 @@ function PokemonCard({ url, name, list}) {
         </>)}
       </CardContent>
     </Card>
+    </div>
   </>
 }
 
-export { PokemonCard };
+export { PokemonDetailsExtended };
