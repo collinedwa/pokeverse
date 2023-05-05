@@ -34,10 +34,12 @@ function PokemonDetailsExtended() {
       height: 700,
       }}> 
       <CardMedia
-        image={pokeData.sprites.front_default}
+        image={pokeData.sprites.other["official-artwork"]["front_default"]}
         title={pokeData.name}
         sx={{ height: 400,
-              mx: "auto" }}
+              width: "60%",
+              objectFit: "cover",
+              mx: "auto"}}
       />
       <CardContent>
         <Box sx={{
