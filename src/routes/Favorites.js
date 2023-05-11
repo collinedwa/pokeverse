@@ -6,7 +6,7 @@ import { PokemonCard } from '../components/PokemonCard';
 
 function Favorites(){
     const {favorites, removeFavorite} = useContext(FavoritesContext);
-    console.log(favorites);
+
     return <>
         <Navigation/>
         <Box

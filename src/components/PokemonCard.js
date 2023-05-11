@@ -17,7 +17,7 @@ function PokemonCard({ url, name, list}) {
       setPokeData(data);
     }
     retrieve();
-  }, [list]);
+  }, [list, favorites]);
 
   if (pokeData === undefined) return null;
 
