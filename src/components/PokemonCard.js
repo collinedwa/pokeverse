@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {useState, useEffect} from 'react';
-import {Typography, Card, Box} from '@mui/material';
+import {Typography, Card, Box, Button} from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {useNavigate} from 'react-router-dom';
+import { FavoritesContext } from '../FavoritesProvider';
 
 function PokemonCard({ url, name, list}) {
   const [pokeData, setPokeData] = useState();
   const navigate = useNavigate();
+  const {favorites, addFavorite, removeFavorite} = useContext(FavoritesContext);
   useEffect(()=>{
     const retrieve = async () => {
       const res = await fetch(url);
@@ -48,6 +50,14 @@ function PokemonCard({ url, name, list}) {
         {pokeData.abilities.map((a, idx) => <>
         <Typography key={idx} variant="body2" color="text.secondary">{a.ability.name}</Typography>
         </>)}
+        {!(favorites.includes(name)) ?
+        <Button variant="primary" onClick={() => addFavorite(pokeData.name)}>
+        Add to Favorites 
+        </Button> :
+        <Button variant="primary" onClick={() => removeFavorite(pokeData.name)}>
+        Remove from Favorites 
+        </Button>
+        }
       </CardContent>
     </Card>
   </>
